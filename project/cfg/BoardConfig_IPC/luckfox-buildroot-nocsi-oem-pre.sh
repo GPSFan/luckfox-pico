@@ -42,6 +42,21 @@ function remove_data()
     # vqefiles
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/share/vqefiles/*
 
+    # remove iqfiles and link in /etc
+    lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/share/iqfiles/*
+    rm $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/iqfiles
+
+    # Samba files
+    lf_rm $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/samba/*
+
+    # bin files
+    lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/bin/*
+
+    # libs
+    mkdir -p $RK_PROJECT_PACKAGE_ROOTFS_DIR/lib/modules/5.10.160/
+
+    mv $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/* $RK_PROJECT_PACKAGE_ROOTFS_DIR/lib/modules/5.10.160/
+
     # ko
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/phy-rockchip-csi2-dphy-hw.ko
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/phy-rockchip-csi2-dphy.ko
