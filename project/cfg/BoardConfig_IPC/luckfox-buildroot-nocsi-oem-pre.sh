@@ -52,10 +52,23 @@ function remove_data()
     # bin files
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/bin/*
 
+    # RkEnv.sh & S21appinit
+
+    rm $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/profile.d/RkEnv.sh
+    rm $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/init.d/S21appinit
+
+
     # libs
     mkdir -p $RK_PROJECT_PACKAGE_ROOTFS_DIR/lib/modules/5.10.160/
 
     mv $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/* $RK_PROJECT_PACKAGE_ROOTFS_DIR/lib/modules/5.10.160/
+
+    # restore protoc and its lib
+
+    cp $RK_BUILDROOT_PATH/output/staging/usr/bin/protoc $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/bin/
+    cp -a $RK_BUILDROOT_PATH/output/staging/usr/lib/libprotoc.so* $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/
+
+
 
     # ko
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/phy-rockchip-csi2-dphy-hw.ko
