@@ -58,6 +58,7 @@ function remove_data()
     rm $RK_PROJECT_PACKAGE_ROOTFS_DIR/etc/init.d/S21appinit
 
 
+
     # libs
     mkdir -p $RK_PROJECT_PACKAGE_ROOTFS_DIR/lib/modules/5.10.160/
 
@@ -67,8 +68,6 @@ function remove_data()
 
     cp $RK_BUILDROOT_PATH/output/staging/usr/bin/protoc $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/bin/
     cp -a $RK_BUILDROOT_PATH/output/staging/usr/lib/libprotoc.so* $RK_PROJECT_PACKAGE_ROOTFS_DIR/usr/lib/
-
-
 
     # ko
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/phy-rockchip-csi2-dphy-hw.ko
@@ -80,7 +79,14 @@ function remove_data()
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/video_rkcif.ko
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/video_rkisp.ko
     lf_rm $RK_PROJECT_PACKAGE_OEM_DIR/usr/ko/mpp_vcodec.ko
-    
+
+    # clean out /oem/ and /userdata
+
+    rm -rfd $RK_PROJECT_PACKAGE_OEM_DIR
+    rmdir $RK_PROJECT_PACKAGE_ROOTFS_DIR/oem
+    rm  $RK_PROJECT_PACKAGE_ROOTFS_DIR/data
+    rmdir $RK_PROJECT_PACKAGE_ROOTFS_DIR/userdata
+
 }
 
 #=========================
